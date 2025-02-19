@@ -66,9 +66,14 @@ export const logResponse = (app: Application, config: Config) => {
 
 
     if (externalLogs && externalLogs.length >= 1) {
-      const [{ externalLog, externalName }] = externalLogs;
+      const [{ externalLog: { naturals, ...externalLog}, externalName }] = externalLogs;
 
       logDetails[externalName] = externalLog;
+
+      logDetails.natural = {
+        ...logDetails.natural,
+        ...naturals
+      }
     }
 
     logger('RESPONSE', message, logDetails)
